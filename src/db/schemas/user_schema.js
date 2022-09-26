@@ -93,7 +93,7 @@ const userSchema = new mongoose.Schema({
     withdrawInfo: {
         type: Array
     },
-    profile_img: {
+    profilePicture: {
         type: String,
         unique: true
     }
