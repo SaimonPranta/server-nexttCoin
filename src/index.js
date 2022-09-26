@@ -42,6 +42,11 @@ const add_notice = require('./routes/admin_routes/add_notice');
 const before_registation_checking = require('./routes/user_routes/before_registation_checking');
 const generation_all = require('./routes/user_routes/generation_all');
 const per_generation = require('./routes/user_routes/per_generation');
+const create_conversations = require('./messenger/routes/create_conversations');
+const conversation_porvider = require('./messenger/routes/conversation_porvider');
+const user_porvider = require('./messenger/routes/user_porvider');
+const create_message = require('./messenger/routes/create_message');
+const message_provider = require('./messenger/routes/message_provider');
 // const filter_delete_user = require('./functions/filter_delete_user');
 const app = express();
 dotenv.config()
@@ -114,6 +119,33 @@ app.post("/investment_approval", adminAuthGard, investment_approval)
 
 
 
+
+
+// ======Create Conversation Route ======
+// app.post("/create_conversations", authGard, create_conversations);
+app.post("/create_conversations", create_conversations);
+
+// ======Provider Conversation Route ======
+app.get("/conversation_porvider/:userID", authGard, conversation_porvider);
+
+// ======Provider User Route ======
+app.get("/user_porvider/:userID", authGard, user_porvider);
+
+// ======Create Message Route ======
+// app.post("/create_message", authGard, create_message);
+app.post("/create_message", create_message);
+
+// ======Provide Message Route ======
+// app.get("/message_provider", message_provider);
+app.get("/message_provider/:conversetionID", message_provider);
+
+
+
+
+
+
+
+
 // ======Mobile Recharge Approval Route ======
 app.post("/mobile_recharge_approval", adminAuthGard, mobile_recharge_approval);
 // ======Withdraw Requesst Approval Route ======
@@ -125,6 +157,7 @@ app.post("/mobile_recharge_decline", adminAuthGard, mobile_recharge_decline)
 app.post("/investment_request_decline", adminAuthGard, investment_request_decline)
 // ======Withdraw Request Decline Route  ======
 app.post("/withdraw_request_decline", adminAuthGard, withdraw_request_decline)
+
 
 
 
@@ -142,6 +175,7 @@ app.get("/notice", read_notice)
 
 // ====== Error Handling Middleware ======
 app.use((error, req, res, next) => {
+    console.log(error)
     if (error.message) {
         res.status(500).send({ error: error.message })
     } else if (error) {
