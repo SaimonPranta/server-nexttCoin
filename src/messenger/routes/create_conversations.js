@@ -4,7 +4,6 @@ const create_conversations = async (req, res) => {
     try {
         const {userID, senderID} = await req.body
 
-        console.log(userID, senderID)
 
         const conversation = await new coversation_collection({
             members: [userID, senderID]

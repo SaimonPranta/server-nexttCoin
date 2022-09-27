@@ -4,7 +4,7 @@ const message_provider = async (req, res) => {
     try {
         const conversetionID = await req.params.conversetionID
 
-        const result = await message_collection.findOne({conversetionID: conversetionID})
+        const result = await message_collection.find({conversetionID: conversetionID})
         console.log(result)
         res.status(200).json({data: result})
 
