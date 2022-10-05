@@ -96,6 +96,9 @@ const userSchema = new mongoose.Schema({
     profilePicture: {
         type: String,
         unique: true
+    },
+    bio: {
+        type: String,
     }
 })
 const user_collection = new mongoose.model("user_collectionsss", userSchema)

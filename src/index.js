@@ -47,8 +47,9 @@ const conversation_porvider = require('./messenger/routes/conversation_porvider'
 const user_porvider = require('./messenger/routes/user_porvider');
 const create_message = require('./messenger/routes/create_message');
 const message_provider = require('./messenger/routes/message_provider');
+const view_profile = require('./routes/user_routes/view_profile');
 // const filter_delete_user = require('./functions/filter_delete_user');
-
+const add_user_porfile_picture = require('./routes/user_routes/add_user_porfile_picture')
 
 
 const app = express();
@@ -94,6 +95,8 @@ app.patch("/passwordReset", authGard, password_reset);
 app.post("/balance_transfer", authGard, balance_transfer);
 // ======Investmen Approval Route ======
 app.post("/investment", authGard, investment);
+// ======Add Profile Picture Route ======
+app.post("/profile_pic", authGard, add_user_porfile_picture);
 
 
 // ======Mobile Recharge Route ======
@@ -111,6 +114,8 @@ app.get("/generation_all", authGard, generation_all);
 app.get("/generation_user", authGard, generation_user);
 // ======Admin User Details Read Route ======
 app.get("/user/userDetails", authGard, user_dtails)
+// ======View User Details Read Route ======
+app.get("/view_profile/:id", authGard, view_profile)
 
 
 // ======Admin All User Read Route ======
@@ -155,11 +160,11 @@ app.post("/mobile_recharge_approval", adminAuthGard, mobile_recharge_approval);
 app.post("/withdraw_request_approval", adminAuthGard, withdraw_request_approval)
 
 // ======Mobile Recharge Decline Route  ======
-app.post("/mobile_recharge_decline", adminAuthGard, mobile_recharge_decline)
+app.post("/mobile_recharge_decline", authGard, mobile_recharge_decline)
 // ======Investment Request Decline Route  ======
-app.post("/investment_request_decline", adminAuthGard, investment_request_decline)
+app.post("/investment_request_decline", authGard, investment_request_decline)
 // ======Withdraw Request Decline Route  ======
-app.post("/withdraw_request_decline", adminAuthGard, withdraw_request_decline)
+app.post("/withdraw_request_decline", authGard, withdraw_request_decline)
 
 
 
