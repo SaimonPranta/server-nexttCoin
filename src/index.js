@@ -49,7 +49,8 @@ const create_message = require('./messenger/routes/create_message');
 const message_provider = require('./messenger/routes/message_provider');
 const view_profile = require('./routes/user_routes/view_profile');
 // const filter_delete_user = require('./functions/filter_delete_user');
-const add_user_porfile_picture = require('./routes/user_routes/add_user_porfile_picture')
+const add_user_porfile_picture = require('./routes/user_routes/add_user_porfile_picture');
+const reset_password = require('./routes/user_routes/reset_password');
 
 
 const app = express();
@@ -85,7 +86,8 @@ app.post("/logIn", login)
 app.get("/user", authGard, read_user);
 // ====== User Activation Route ======
 app.post("/activation", authGard, user_activation);
-
+// ====== Reset Password Route ======
+app.patch("/reset_password", authGard, reset_password);
 
 // ====== User Update Route ======
 app.patch("/user", authGard, update_user);
