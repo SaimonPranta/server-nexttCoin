@@ -49,18 +49,18 @@ const balance_transfer = async (req, res) => {
                                     new: true
                                 });
                             res.status(200).json({
-                                sucess: `Sucessfully transfer your balance to ${receiverUserUpdate.firstName} ${receiverUserUpdate.lastName}`,
+                                sucess: `Sucessfully transfer your balance to ${receiverUserUpdate.firstName} ${receiverUserUpdate.lastName} !`,
                                 data: porviderUserUpdate
                             })
                         }
                     } else {
-                        res.status(500).json({ failed: "Sorry, you have not sufficient Balance." })
+                        res.status(500).json({ failed: "Sorry, you have not sufficient Balance !." })
                     }
                 } else {
-                    res.status(500).json({ failed: "Your Provided User Number are invalid" })
+                    res.status(500).json({ failed: "Your Provided User Number are invalid !" })
                 }
             } else {
-                res.status(500).json({ failed: "Your Provided User Number are invalid" })
+                res.status(500).json({ failed: "Your Provided User Number are invalid !" })
             }
 
         } else {

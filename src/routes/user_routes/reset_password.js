@@ -12,10 +12,12 @@ const reset_password = async (req, res) => {
 
 
             const checkPassword = await bcrypt.compare(oldPassword, user.password)
+
             if (checkPassword) {
                 const hashingPassword = await bcrypt.hash(newPassword, 10)
 
                 console.log(hashingPassword)
+
 
                 const updateUser = await user_collection.findOneAndUpdate({ _id: _id },
                     {
@@ -27,16 +29,21 @@ const reset_password = async (req, res) => {
                         new: true
                     })
 
+
+
                 if (updateUser._id) {
                     updateUser.password = null;
-                    res.status(200).json({ sucess: "Sucessfully your password." })
+                    res.status(200).json({ sucess: "Reset Password Sucessfully !" })
                 } else {
-                    res.status(500).json({failed: "Failed to reset your password, please try again." })
+                    res.status(500).json({ failed: "Failed to Reset Password, Please Try Again !" })
                 }
+            }else {
+                res.status(500).json({ failed: "Your Password are Wrong, Please Check Your Password !" })
             }
         }
     } catch (error) {
-        res.status(500).json({failed: "Failed to reset your password, please try again." })
+        console.log(error)
+        res.status(500).json({ failed: "Failed to Reset Password, Please Try Again !" })
     }
 };
 

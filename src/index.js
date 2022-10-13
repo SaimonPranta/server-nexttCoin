@@ -51,6 +51,7 @@ const view_profile = require('./routes/user_routes/view_profile');
 // const filter_delete_user = require('./functions/filter_delete_user');
 const add_user_porfile_picture = require('./routes/user_routes/add_user_porfile_picture');
 const reset_password = require('./routes/user_routes/reset_password');
+const edit_user = require('./routes/admin_routes/edit_user');
 
 
 const app = express();
@@ -79,7 +80,7 @@ app.get('/slider_provider', slider_provider);
 // ====== User Before Registation Checing Route ======
 app.post('/before_registation_checking', before_registation_checking);
 // ====== User Registation Route ======
-app.post('/user', registation);
+app.post('/registation', registation);
 // ====== User Login Route ======
 app.post("/logIn", login)
 // ====== Read User Route ======
@@ -91,6 +92,7 @@ app.patch("/reset_password", authGard, reset_password);
 
 // ====== User Update Route ======
 app.patch("/user", authGard, update_user);
+app.patch("/admin/updateUser", adminAuthGard, edit_user);
 // ======User Password Reset Route ======
 app.patch("/passwordReset", authGard, password_reset);
 // ======Balance Transfer Route ======

@@ -26,18 +26,18 @@ const investment = async (req, res) => {
                 });
             if (user._id) {
                 res.status(200).json({
-                    sucess: "Your Invest request are sucessfull.",
+                    sucess: "Your Investment request are sucessfull !",
                     data: user
                 })
             } else {
-                res.status(500).json({ failed: "Failed to create Invest request, please try again." })
+                res.status(500).json({ failed: "Failed to create Investment request, please try again !" })
             }
 
         } else {
-            res.status(500).json({ failed: "Please fill all the fild and try again." })
+            res.status(500).json({ failed: "Please fill all the fild and try again !" })
         }
     } catch (error) {
-        res.status(500).json({ failed: "Failed to create Invest request, please try again." })
+        res.status(500).json({ failed: "Failed to create Investment request, please try again !" })
     }
 }
 

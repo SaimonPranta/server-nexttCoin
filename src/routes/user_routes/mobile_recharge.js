@@ -26,19 +26,19 @@ const mobile_rechare = async (req, res) => {
                 });
             if (user._id) {
                 res.status(200).json({
-                    sucess: "Your mobile recharge are sucessfull.",
+                    sucess: "Your Mobile Recharge are sucessfull !",
                     data: user
                 })
             } else {
-                res.status(500).json({ failed: "Failed to create mobile recharge, please try again." })
+                res.status(500).json({ failed: "Failed to create Mobile Mecharge, please try again !" })
             }
 
 
         } else {
-            res.status(500).json({ failed: "Failed to create mobile recharge, please try again." })
+            res.status(500).json({ failed: "Failed to create Mobile Recharge, please try again !" })
         }
     } catch (error) {
-        res.status(500).json({ failed: "Failed to create mobile recharge, please try again." })
+        res.status(500).json({ failed: "Failed to create Mobile Recharge, please try again !" })
     }
 };
 

@@ -2,17 +2,21 @@ const user_collection = require("../../db/schemas/user_schema");
 const date_provider = require("../../functions/date_provider");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nameConverter = require("../../functions/NameConverter");
 
 
 const registation = async (req, res) => {
     try {
+        console.log("i am herer")
         const { firstName, lastName, phoneNumber, referNumber, password } = await req.body
+        const convertedFirstName = await nameConverter(firstName)
+        const convertedLastName = await nameConverter(lastName)
 
         if (referNumber && phoneNumber) {
             const hashingPassword = await bcrypt.hash(password, 10)
             const userInfo = await {
-                firstName,
-                lastName,
+                firstName: convertedFirstName,
+                lastName: convertedLastName,
                 referNumber: referNumber,
                 phoneNumber: phoneNumber,
                 password: hashingPassword,
@@ -48,7 +52,7 @@ const registation = async (req, res) => {
 
                             res.status(201).json({
                                 data: createdUser,
-                                sucess: "sucessfully created your accout",
+                                sucess: "Sucessfully Create an Account !",
                                 token: token
                             })
                         } else {
@@ -67,8 +71,10 @@ const registation = async (req, res) => {
         }
 
     } catch (err) {
+        console.log("error form registation", err)
         res.status(404).send({ failed: "failed to Create your account, please tryout latter" })
     }
 };
 
 module.exports = registation;
+

@@ -5,15 +5,16 @@ const conversation_porvider = async (req, res) => {
         const userID = await req.params.userID
 
         const result = await coversation_collection.find({
-            members:{ $in:[userID] }
+            members: { $in: [userID] }
         })
         console.log(result)
-        res.status(200).json({data: result})
+        res.status(200).json({ data: result })
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({faild: "Failed to provide Conversation."})
+        res.status(500).json({ faild: "Failed to provide Conversation." })
     }
 }
 
 module.exports = conversation_porvider;
+
