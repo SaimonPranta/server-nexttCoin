@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const user_collection = require("../../db/schemas/user_schema");
-const nameConverter = require("../../functions/NameConverter");
+const nameConverter = require("../../functions/nameConverter");
 
 const edit_user = async (req, res) => {
     try {

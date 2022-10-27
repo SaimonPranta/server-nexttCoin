@@ -4,8 +4,7 @@ const date_provider = require("../../functions/date_provider");
 
 const balance_transfer = async (req, res) => {
     try {
-        const id = req.id
-        const { amount, phoneNumber } = req.body;
+        const {id, amount, phoneNumber } = req.body;
 
         if (id && amount && phoneNumber) {
             const receiverUserVarifiy = await user_collection.find({ phoneNumber: phoneNumber.toString() });

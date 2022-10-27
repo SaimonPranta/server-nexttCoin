@@ -12,7 +12,7 @@ const before_registation_checking = async (req, res) => {
                 referNumber: 1,
                 isActive: 1
             })
-            if (refNumberChacking?._id) {
+            if (refNumberChacking && refNumberChacking._id) {
                 if (refNumberChacking.isActive) {
                     const phoneNumberChacking = await user_collection.findOne({ phoneNumber: phoneNumber }).select({
                         phoneNumber: 1,
@@ -21,7 +21,7 @@ const before_registation_checking = async (req, res) => {
 
                     // res.json({})
 
-                    if (phoneNumberChacking?._id) {
+                    if (phoneNumberChacking && phoneNumberChacking._id) {
                         res.status(404).send({ failed: "This Phone Number are Already Exist, Please try With Another Number !" })
                     } else {
                         res.status(200).send({ sucess: true })
@@ -37,7 +37,6 @@ const before_registation_checking = async (req, res) => {
             res.status(404).send({ failed: "Please Fill the Full Form and then Tryout !" })
         }
     } catch (err) {
-        console.log("data", err)
         res.status(404).send({ failed: "Failed to Create Your Account, Please tryout Latter !" })
     }
 };

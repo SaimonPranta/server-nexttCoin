@@ -7,7 +7,7 @@ const per_generation = async (req, res) => {
 
         const user = await user_collection.findOne({ _id: id });
 
-        if (user?._id && generation) {
+        if (user && user._id && generation) {
             if (generation == 1) {
                 const arrayOfGeneration = await [...user.generation_1]
 
@@ -104,7 +104,6 @@ const per_generation = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error)
         res.status(500).json({ faild: "failed to load data." })
     }
 }

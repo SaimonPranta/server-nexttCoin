@@ -3,9 +3,8 @@ const date_provider = require("../../functions/date_provider");
 
 const mobile_rechare = async (req, res) => {
     try {
-        const id = req.id
-        const { simProvider, amount, phoneNumber, simStatus } = req.body;
-        if (simProvider && amount && phoneNumber && simStatus) {
+        const { id, simProvider, amount, phoneNumber, simStatus } = req.body;
+        if ( id && simProvider && amount && phoneNumber && simStatus) {
             const requestID = await Math.floor(Math.random() * 10) + Date.now();
             const reqestObj = await {
                 requestID: requestID,

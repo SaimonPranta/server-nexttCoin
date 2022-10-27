@@ -4,9 +4,8 @@ const date_provider = require("../../functions/date_provider");
 
 const investment = async (req, res) => {
     try {
-        const id = req.id
-        const { provider, amount, phoneNumber } = req.body;
-        if (provider && amount && phoneNumber) {
+        const { id, provider, amount, phoneNumber } = req.body;
+        if ( id && provider && amount && phoneNumber) {
             const requestID = await Math.floor(Math.random() * 10) + Date.now();
             const reqestObj = await {
                 requestID: requestID,

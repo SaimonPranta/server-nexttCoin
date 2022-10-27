@@ -5,9 +5,8 @@ const date_provider = require("../../functions/date_provider");
 
 const withdraw = async (req, res) => {
     try {
-        const id = req.id
-        const { porvider, amount, phoneNumber } = req.body;
-        if (porvider && amount && phoneNumber) {
+        const {id, porvider, amount, phoneNumber } = req.body;
+        if (id && porvider && amount && phoneNumber) {
             const floorAmount = Math.floor(amount)
             const charge = floorAmount * 5 / 100
             const total = charge + floorAmount

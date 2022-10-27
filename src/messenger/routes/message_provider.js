@@ -5,7 +5,6 @@ const message_provider = async (req, res) => {
         const conversetionID = await req.params.conversetionID
 
         const result = await message_collection.find({conversetionID: conversetionID})
-        console.log(result)
         res.status(200).json({data: result})
 
     } catch (error) {

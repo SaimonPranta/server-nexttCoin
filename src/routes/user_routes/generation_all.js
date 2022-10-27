@@ -8,7 +8,7 @@ const generation_all = async (req, res) => {
 
         const user = await user_collection.findOne({ _id: id });
 
-        if (user?._id) {
+        if (user && user._id) {
             const arrayOfGeneration = await [...user.generation_1, ...user.generation_2, ...user.generation_3, ...user.generation_4, ...user.generation_5, ...user.generation_6, ...user.generation_7, ...user.generation_8, ...user.generation_9, ...user.generation_10]
             
             const allActiveUser = await user_collection.find({ phoneNumber: arrayOfGeneration });
@@ -22,7 +22,6 @@ const generation_all = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error)
         res.status(500).json({ faild: "failed to load data." })
     }
 };

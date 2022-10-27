@@ -1,23 +1,25 @@
 const user_collection = require("../../db/schemas/user_schema");
-const nameConverter = require("../../functions/NameConverter");
+const nameConverter = require("../../functions/nameConverter");
 
 
 const update_user = async (req, res) => {
     try {
         const { firstName, lastName, bio, phoneNumber, _id } = await req.body;
 
-        if (firstName && lastName && bio && phoneNumber && _id) {
+        if (firstName && lastName && phoneNumber && _id) {
 
             const convertedFirstName = await nameConverter(firstName)
             const convertedLastName = await nameConverter(lastName)
 
+            const userInfo = await {
+                firstName: convertedFirstName,
+                lastName: convertedLastName,
+                bio: bio ? bio : ""
+            }
+
             const updateUser = await user_collection.findOneAndUpdate({ _id: _id, phoneNumber: phoneNumber },
                 {
-                    $set: {
-                        firstName: convertedFirstName,
-                        lastName: convertedLastName,
-                        bio: bio
-                    }
+                    $set: userInfo
                 },
                 {
                     new: true
@@ -31,9 +33,10 @@ const update_user = async (req, res) => {
             } else {
                 res.status(500).json({ failed: "Failed to Update Your Profile, Please Try Again !" } )
             }
+        } else {
+            res.status(500).json({ failed: "Failed to Update Your Profile, Please Try Again !" } )
         }
     } catch (error) {
-        console.log(error)
         res.status(500).json({ failed: "Failed to Update Your Profile, Please Try Again !" } )
     }
 };

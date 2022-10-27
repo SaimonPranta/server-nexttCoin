@@ -16,8 +16,6 @@ const reset_password = async (req, res) => {
             if (checkPassword) {
                 const hashingPassword = await bcrypt.hash(newPassword, 10)
 
-                console.log(hashingPassword)
-
 
                 const updateUser = await user_collection.findOneAndUpdate({ _id: _id },
                     {
@@ -42,7 +40,6 @@ const reset_password = async (req, res) => {
             }
         }
     } catch (error) {
-        console.log(error)
         res.status(500).json({ failed: "Failed to Reset Password, Please Try Again !" })
     }
 };

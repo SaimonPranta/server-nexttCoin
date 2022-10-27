@@ -9,7 +9,7 @@ const create_conversations = async (req, res) => {
             members: [userID, senderID]
         })
         const result = await conversation.save()
-        res.status(401).json({data: res})
+        res.status(201).json({data: result})
 
     } catch (error) {
         res.status(500).json({faild: "Failed to create Conversation."})

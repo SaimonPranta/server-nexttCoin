@@ -52,6 +52,10 @@ const view_profile = require('./routes/user_routes/view_profile');
 const add_user_porfile_picture = require('./routes/user_routes/add_user_porfile_picture');
 const reset_password = require('./routes/user_routes/reset_password');
 const edit_user = require('./routes/admin_routes/edit_user');
+const instant_message_porvider = require('./messenger/routes/instant_message_provider');
+const public_users = require('./routes/public/public_users');
+const check_forgot_pass_phonenumber = require('./routes/public/check_forgot_pass_phonenumber');
+const forgot_password = require('./routes/public/forgot_password');
 
 
 const app = express();
@@ -65,7 +69,10 @@ app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
 app.use(fileUpload());
-app.use(express.static(path.join(__dirname, "images/slider_img")))
+app.use(express.static(path.join(__dirname, "images/profile_picture")))
+
+
+console.log(__dirname + "images/profile_picture")
 
 
 
@@ -73,7 +80,11 @@ app.use(express.static(path.join(__dirname, "images/slider_img")))
 // app.get('/', root);
 app.get('/', root);
 
+// ====== User Forgotpassowrd Phone Number Checking Route ======
+app.post('/check_forgot_pass_phonenumber', check_forgot_pass_phonenumber);
 
+// ====== User Forgot Phone Number Checking Route ======
+app.post('/forgot_password', forgot_password);
 
 // ====== Slider Provider Route ======
 app.get('/slider_provider', slider_provider);
@@ -83,15 +94,21 @@ app.post('/before_registation_checking', before_registation_checking);
 app.post('/registation', registation);
 // ====== User Login Route ======
 app.post("/logIn", login)
+
 // ====== Read User Route ======
 app.get("/user", authGard, read_user);
+
+// ======Public User ======
+app.get("/public_users", public_users);
+
 // ====== User Activation Route ======
 app.post("/activation", authGard, user_activation);
 // ====== Reset Password Route ======
 app.patch("/reset_password", authGard, reset_password);
 
 // ====== User Update Route ======
-app.patch("/user", authGard, update_user);
+app.patch("/update_user", authGard, update_user);
+// ======Update User  Route ======
 app.patch("/admin/updateUser", adminAuthGard, edit_user);
 // ======User Password Reset Route ======
 app.patch("/passwordReset", authGard, password_reset);
@@ -123,7 +140,7 @@ app.get("/view_profile/:id", authGard, view_profile)
 
 
 // ======Admin All User Read Route ======
-app.get("/admin/users", adminAuthGard, adminAuthGard, all_user);
+app.get("/admin/users", adminAuthGard, all_user);
 // ======Admin User Update Read Route ======
 app.post("/admin/update_user", adminAuthGard, admin_update_user);
 // ======Admin Investment Requesst Approval Route ======
@@ -144,12 +161,14 @@ app.get("/conversation_porvider/:userID", authGard, conversation_porvider);
 app.get("/user_porvider/:userID", authGard, user_porvider);
 
 // ======Create Message Route ======
-// app.post("/create_message", authGard, create_message);
-app.post("/create_message", create_message);
+app.post("/create_message", authGard, create_message);
 
 // ======Provide Message Route ======
+app.get("/message_provider/:conversetionID", authGard, message_provider);
+
+// ======Instan Message Provider Route ======
 // app.get("/message_provider", message_provider);
-app.get("/message_provider/:conversetionID", message_provider);
+app.get("/instannMesssageProvider/:userID/:friendID", instant_message_porvider);
 
 
 
@@ -187,7 +206,7 @@ app.get("/notice", read_notice)
 
 // ====== Error Handling Middleware ======
 app.use((error, req, res, next) => {
-    console.log(error)
+    // console.log(error)
     if (error.message) {
         res.status(500).send({ error: error.message })
     } else if (error) {
