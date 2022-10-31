@@ -7,6 +7,7 @@ const nameConverter = require("../../functions/nameConverter");
 
 const registation = async (req, res) => {
     try {
+        console.log("registiation")
         const { firstName, lastName, phoneNumber, referNumber, password } = await req.body
         const convertedFirstName = await nameConverter(firstName)
         const convertedLastName = await nameConverter(lastName)
@@ -70,6 +71,7 @@ const registation = async (req, res) => {
         }
 
     } catch (err) {
+        console.log(err)
         res.status(404).send({ failed: "failed to Create your account, please tryout latter" })
     }
 };

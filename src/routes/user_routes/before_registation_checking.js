@@ -4,6 +4,7 @@ const user_collection = require("../../db/schemas/user_schema");
 
 const before_registation_checking = async (req, res) => {
     try {
+        console.log("hello")
         const { phoneNumber, referNumber } = await req.body
 
         if (referNumber && phoneNumber) {

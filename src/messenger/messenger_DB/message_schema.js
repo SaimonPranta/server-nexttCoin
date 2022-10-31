@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const dbConnection = require("../../db/connection.js");
 
 
 const message_sechema = new mongoose.Schema({
@@ -17,6 +18,8 @@ const message_sechema = new mongoose.Schema({
 }, 
 {timestamps: true}
 )
-const message_collection = new mongoose.model("message", message_sechema)
+// const message_collection = new mongoose.model("message", message_sechema)
+const message_collection = dbConnection.messengerBD.model("message", message_sechema)
+
 
 module.exports = message_collection;

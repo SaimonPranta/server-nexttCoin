@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-require("./db/connection");
+// require("./db/connection");
 const user_collection = require("./db/schemas/user_schema");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
